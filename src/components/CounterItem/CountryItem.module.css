@@ -1,0 +1,27 @@
+.card{
+    width: 20rem;
+    background: var(--bg-element1);
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 4%) 0px 4px 16px 0px;
+    transition: box-shadow 0.25s ease-in 0s, transform 0.25s ease-in 0s;
+    margin: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    min-width: 240px; 
+    max-height: 350px; 
+    background-color: white;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: rgb(0 0 0 / 8%) 0px 12px 20px 0px;
+}
+
+.card h4 {
+    padding: 0rem .5rem;
+}
+

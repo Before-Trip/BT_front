@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Countries from "./pages/Countries";
+import Countries from "./pages/Countries/Countries";
 
 function App() {
   return (
