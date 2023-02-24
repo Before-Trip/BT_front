@@ -1,22 +1,56 @@
 /* Countries */
 .Countries {
-    margin-top: 45px;
-    padding: 0 18px
+  margin-top: 45px;
+  padding: 0 18px;
 }
 
 .Countries h2 {
-    font-size: 19px; 
-    max-width: 732px; 
-    margin: 0 auto; 
-    font-weight: 700; 
+  font-size: 19px;
+  max-width: 732px;
+  margin: 0 auto;
+  font-weight: 700;
 }
 
 .card_wrapper {
-    max-width: 733px; 
-    margin: 0 auto; 
-    display: flex; 
-    white-space: nowrap; 
-    overflow-x: hidden;
-    padding: 5rem;
-    box-shadow: 2px -2px 30px 7px rgb(0 0 0 / 16%) inset;
+  max-width: 733px;
+  margin: 0 auto;
+  display: flex;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 5rem;
+  box-shadow: 2px -2px 30px 7px rgb(0 0 0 / 16%) inset;
+}
+
+.card_wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.card_wrapper::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+.card_wrapper::-webkit-scrollbar-thumb {
+  background: #acacac;
+  border: 0px none #ffffff;
+  border-radius: 100px;
+}
+.card_wrapper::-webkit-scrollbar-thumb:hover {
+  background: #777777;
+}
+.card_wrapper::-webkit-scrollbar-thumb:active {
+  background: #777777;
+}
+.card_wrapper::-webkit-scrollbar-track {
+  background: #dadada;
+  border: 0px none #ffffff;
+  border-radius: 100px;
+}
+.card_wrapper::-webkit-scrollbar-track:hover {
+  background: #dadada;
+}
+.card_wrapper::-webkit-scrollbar-track:active {
+  background: #dadada;
+}
+.card_wrapper::-webkit-scrollbar-corner {
+  background: transparent;
 }
