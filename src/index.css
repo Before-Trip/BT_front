@@ -1,6 +1,6 @@
 :root {
   --color-black: #333333;
-  --color--bg: #F4F4F4;
+  --color--bg: #f4f4f4;
 }
 
 * {
@@ -17,7 +17,7 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 code {
