@@ -1,0 +1,57 @@
+.textarea {
+    resize: none;
+    padding: 1rem 1rem 1.5rem;
+    outline: none;
+    border: 1px solid var(--clr-grey);
+    margin-bottom: 1.5rem;
+    width: 100%;
+    border-radius: 4px;
+    min-height: 6.125rem;
+    font-size: 1rem;
+    color: var(--clr-black);
+    line-height: 1.75;
+}
+
+.textarea::placeholder {
+    color: var(--clr-grey);
+}
+
+.button_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.button_wrapper button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    padding: 0px 1.25rem;
+    height: 2rem;
+    font-size: 1rem;
+    transition: .1s ease-out all;
+}
+
+.button_save {
+    background: var(--clr-blue);
+    color: #fff;
+}
+
+.button_cancel {
+    background: transparent;
+    color: var(--clr-blue)
+}
+
+.button_cancel:hover {
+    background: var(--clr-bg);
+}
+
+.button_save:hover {
+    filter: brightness(.95);
+
+}

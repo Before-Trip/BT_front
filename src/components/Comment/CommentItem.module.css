@@ -1,0 +1,28 @@
+header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.btn_wrapper {
+    display: flex;
+    gap: 15px;
+}
+
+.btn_wrapper button {
+    display: inline;
+    outline: none;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    color: var(--clr-blue);
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+
+}
+
+.comment_content {
+    padding: 1rem 1rem 0px 0px;
+    margin-left: 50px;
+}

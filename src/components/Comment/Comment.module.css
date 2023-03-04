@@ -1,0 +1,18 @@
+.Comment {
+    padding: 0;
+    background-color: var(--clr-bg);
+    transition: .2s ease-out;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.625rem;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 732px) {
+    .Comment {
+        padding: 0px 2rem 4rem;
+    }
+}
