@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
 
 :root {
+  /* color */
   --clr-black: #333333;
   --clr-bg: #F4F4F4;
   --clr-blue: rgb(60, 126, 210);
-  --clr-grey: #CCCCCC;
+  --clr-noAccess: #CCCCCC;
+  --clr-grey: #999999;
+  --clr-darkGrey: #666666;
+
+  /* transition */
+  --transition: .2s
 }
 
 * {
