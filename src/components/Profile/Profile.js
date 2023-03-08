@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import style from './Profile.module.css'
 
 
-function Profile() {
+function Profile({ user, created_at }) {
     return (
         <div className={style.profile}>
             <Link>
@@ -11,8 +11,8 @@ function Profile() {
                 </div>
             </Link>
             <div className={style.info}>
-                <h6>작성자 이름입니다.</h6>
-                <span>2023.02.27 오후 12:50</span>
+                <h6>{user}</h6>
+                <span>{created_at}</span>
             </div>
         </div >
 
