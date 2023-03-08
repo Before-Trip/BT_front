@@ -3,6 +3,7 @@ import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router
 import Review from "./pages/Review/Review";
 import Countries from "./pages/Countries/Countries";
 import Home from "./pages/Home";
+import Community from "./pages/Community/Community";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     path: "/:id",
     element: <Home />,
     children: [
+      {
+        path: "community",
+        element: <Community />,
+      },
       {
         path: "review/:reviewId",
         element: <Review />,
