@@ -19,7 +19,7 @@ const linkList = [
     },
     {
         name: '로그인',
-        path: '/'
+        path: '/account/login'
     },
 ]
 

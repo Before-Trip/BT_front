@@ -4,18 +4,26 @@ import Review from "./pages/Review/Review";
 import Countries from "./pages/Countries/Countries";
 import Home from "./pages/Home";
 import Community from "./pages/Community/Community";
+import Account from "./pages/Community/Account";
+import Login from "./components/Account/Login";
 
 const router = createBrowserRouter([
   {
-    path: "/account",
-    element: <div>회원가입 영역입니다.</div>,
+    path: "account",
+    element: <Account />,
+    children: [
+      {
+        path: "login",
+        element: <Login />
+      }
+    ]
   },
   {
     path: "/",
     element: <Countries />,
   },
   {
-    path: "/:id",
+    path: ":id",
     element: <Home />,
     children: [
       {
@@ -26,10 +34,6 @@ const router = createBrowserRouter([
         path: "review/:reviewId",
         element: <Review />,
       },
-      {
-        path: "",
-        element: <div>국가영역입니다.</div>
-      }
     ]
   }
 ])

@@ -4,7 +4,8 @@
   /* color */
   --clr-black: #333333;
   --clr-bg: #F4F4F4;
-  --clr-blue: rgb(60, 126, 210);
+  --clr-accent: #0061FF;
+  --clr-blue: #3c7ed2;
   --clr-noAccess: #CCCCCC;
   --clr-grey: #999999;
   --clr-darkGrey: #666666;
@@ -34,6 +35,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  background-color: var(--clr-bg);
 }
 
 code {
@@ -59,4 +61,11 @@ a {
 
 .inner__content {
   padding: 20px;
+}
+
+.Account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
