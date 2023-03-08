@@ -5,6 +5,7 @@
   --clr-bg: #F4F4F4;
   --clr-blue: rgb(60, 126, 210);
   --clr-grey: #CCCCCC;
+
 }
 
 * {
@@ -24,6 +25,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 code {
