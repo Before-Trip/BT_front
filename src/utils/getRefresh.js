@@ -9,13 +9,12 @@ export const getRefresh = async () => {
         body: JSON.stringify({
             refresh:
                 document.cookie.match(new RegExp("(?:^|; )" + "refresh".replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"))[1]
-            // cookies.refresh
         })
     })
 
     if (refreshTokenRes.ok) {
-        const refreshToken = await refreshTokenRes.json()
-        // console.log(refreshToken)
-        return refreshToken
+        const Token = await refreshTokenRes.json()
+        console.log(Token)
+        return Token.access
     }
 }

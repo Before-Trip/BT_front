@@ -1,6 +1,6 @@
 import { useState } from 'react'
+import { getRefresh } from '../../utils/getRefresh'
 import style from './CommentForm.module.css'
-
 
 function CommentForm({ isEdit, toggleIsEdit, content, id, create }) {
 
@@ -18,24 +18,32 @@ function CommentForm({ isEdit, toggleIsEdit, content, id, create }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const createRes = await fetch(`http://localhost:8000/articles/review/${id}/comment/`, {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                content: localContent,
-            })
-        })
+        const accessToken = await getRefresh();
 
-        if (createRes.ok) {
-            const createResData = await createRes.json()
-            // console.log(createResData)
-            create(createResData)
-            setLocalContent("")
+        if (accessToken) {
+            console.log(accessToken)
+            const createRes = await fetch(`http://localhost:8000/articles/review/${id}/comment/`, {
+                method: 'POST',
+                mode: 'cors',
+                credentials: 'include',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: localContent,
+                })
+            })
+
+            if (createRes.ok) {
+                const createResData = await createRes.json()
+                // console.log(createResData)
+                create(createResData)
+                setLocalContent("")
+            }
         }
+
+
     }
 
     return (
