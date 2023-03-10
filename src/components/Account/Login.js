@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import { useCookies } from 'react-cookie'
 import { Link } from 'react-router-dom'
+import { getRefresh } from '../../utils/getRefresh'
 import style from './Login.module.css'
 
 function Login() {
-
-    const [cookies, setCookie, removeCookie] = useCookies('refresh');
 
     const [inputValue, setInputValue] = useState({
         id: "",
@@ -17,45 +15,69 @@ function Login() {
 
         setInputValue({
             ...inputValue,
-            [name]: e.target.value
+            [name]: value
         })
+    }
+
+    const loginUser = async (args) => {
+        const loginRes = await fetch('http://localhost:8000/users/auth/',
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: args.id,
+                    password: args.pw,
+                })
+            })
+
+        // console.log(loginRes)
+
+        if (loginRes.ok) {
+            const loginResData = await loginRes.json()
+            // console.log(loginResData)
+            return loginResData.token.refresh
+        }
 
     }
 
-    const handleSubmit = (e) => {
+    const getCommentList = async (token) => {
+        const commentsRes = await fetch('http://localhost:8000/articles/review/1/comment/', {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
+        if (commentsRes.ok) {
+            const commentData = await commentsRes.json();
+            console.log(commentData)
+        }
+    }
+
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        fetch('http://localhost:8000/users/auth/', {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: inputValue.id,
-                password: inputValue.pw,
-            })
-        }).then(res => res.json())
-            .then(console.log)
+        const accessToken = await loginUser(inputValue);
+
+
+
+        // if (accessToken) {
+        //     // console.log(accessToken)
+        //     await getRefresh()
+        // }
 
     }
-
-    const handleRefresh = () => {
-        let prom = fetch('http://127.0.0.1:8000/users/auth/refresh/', {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                refresh: cookies.refresh
-            })
-        })
-        console.log(cookies.refresh)
-        prom.then(res => res.json())
-            .then(console.log)
+    const handleRefresh = async () => {
+        // console.log("요청 보내기전: ", cookies.refresh)
+        const refreshToken = await getRefresh();
+        console.log(refreshToken)
     }
     return (
         <section className={style.Login}>
