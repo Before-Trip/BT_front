@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom'
 import { BASE_URL } from '../../utils/const'
 import { getRefresh } from '../../utils/getRefresh'
 import style from './Login.module.css'
+import { useCookies } from 'react-cookie';
 
 function Login() {
+
+    const [cookies, , removeCookie] = useCookies(['access']);
 
     const [inputValue, setInputValue] = useState({
         id: "",
@@ -80,6 +83,22 @@ function Login() {
         const refreshToken = await getRefresh();
         console.log(refreshToken)
     }
+
+    const handleLogout = async () => {
+        const logoutRes = await fetch(`${BASE_URL}users/auth`, {
+            method: 'DELETE',
+            headers: {
+                // 'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
+        if (logoutRes.ok) {
+            const logOut = await logoutRes.json()
+            console.log(logOut)
+            removeCookie('refresh', { path: '/' })
+        }
+    }
     return (
         <section className={style.Login}>
             <Link to="/" className={style.logo}>
@@ -94,6 +113,9 @@ function Login() {
             </form>
             <button type='submit' className={style.button} onClick={handleRefresh}>
                 리프레시 해주세용
+            </button>
+            <button type='submit' className={style.button} onClick={handleLogout}>
+                로그아웃 해주세용
             </button>
         </section>
     )
