@@ -3,6 +3,7 @@ import Profile from '../../components/Profile/Profile'
 import style from './Reivew.module.css'
 import Comment from '../../components/Comment/Comment'
 import { useEffect, useState } from "react"
+import { BASE_URL } from "../../utils/const"
 
 function Review() {
 
@@ -10,7 +11,7 @@ function Review() {
     const [review, setReview] = useState({});
 
     useEffect(() => {
-        fetch("http://localhost:8000/articles/review/1/")
+        fetch(`${BASE_URL}articles/review/1/`)
             .then(res => res.json())
             .then(res => {
                 setReview(res);

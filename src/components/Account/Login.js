@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BASE_URL } from '../../utils/const'
 import { getRefresh } from '../../utils/getRefresh'
 import style from './Login.module.css'
 
@@ -20,7 +21,7 @@ function Login() {
     }
 
     const loginUser = async (args) => {
-        const loginRes = await fetch('http://localhost:8000/users/auth/',
+        const loginRes = await fetch(`${BASE_URL}users/auth/`,
             {
                 method: 'POST',
                 credentials: 'include',
@@ -44,7 +45,7 @@ function Login() {
     }
 
     const getCommentList = async (token) => {
-        const commentsRes = await fetch('http://localhost:8000/articles/review/1/comment/', {
+        const commentsRes = await fetch(`${BASE_URL}articles/review/1/comment/`, {
             method: 'GET',
             credentials: 'include',
             headers: {
