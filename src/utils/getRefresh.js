@@ -1,5 +1,7 @@
+import { BASE_URL } from "./const"
+
 export const getRefresh = async () => {
-    const refreshTokenRes = await fetch('http://127.0.0.1:8000/users/auth/refresh/', {
+    const refreshTokenRes = await fetch(`${BASE_URL}users/auth/refresh/`, {
         method: 'POST',
         credentials: 'include',
         headers: {

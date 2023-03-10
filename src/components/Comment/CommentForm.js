@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BASE_URL } from '../../utils/const'
 import { getRefresh } from '../../utils/getRefresh'
 import style from './CommentForm.module.css'
 
@@ -22,7 +23,7 @@ function CommentForm({ isEdit, toggleIsEdit, content, id, create }) {
 
         if (accessToken) {
             console.log(accessToken)
-            const createRes = await fetch(`http://localhost:8000/articles/review/${id}/comment/`, {
+            const createRes = await fetch(`${BASE_URL}articles/review/${id}/comment/`, {
                 method: 'POST',
                 mode: 'cors',
                 credentials: 'include',

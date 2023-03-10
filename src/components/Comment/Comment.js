@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { BASE_URL } from '../../utils/const'
 import style from './Comment.module.css'
 import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
@@ -8,7 +9,7 @@ function Comment({ id }) {
     const [commentList, setCommentList] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:8000/articles/review/${id}/comment/`)
+        fetch(`${BASE_URL}articles/review/${id}/comment/`)
             .then(res => res.json())
             .then(res => {
                 setCommentList(res)
