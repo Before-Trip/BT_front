@@ -1,0 +1,52 @@
+.Login {
+
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    height: 2rem;
+    margin-bottom: 1rem;
+}
+
+.logo img {
+    height: 100%;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm input {
+    width: 336px;
+    height: 48px;
+    margin-bottom: 8px;
+    padding: 0 16px 0 48px;
+    border-radius: 5px;
+    border: 1px solid var(--clr-noAccess)
+}
+
+.loginForm input:focus {
+    outline: none;
+    border: 1px solid #acacac;
+  }
+  
+  .loginForm input:focus~svg {
+    fill: rgba(155, 155, 155)
+  }
+
+  .button {
+    background-color: var(--clr-accent);
+    padding: 1rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    opacity: .9;
+  }
