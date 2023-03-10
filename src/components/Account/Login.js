@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../../utils/const'
 import { getRefresh } from '../../utils/getRefresh'
 import style from './Login.module.css'
@@ -7,7 +7,9 @@ import { useCookies } from 'react-cookie';
 
 function Login() {
 
-    const [cookies, , removeCookie] = useCookies(['access']);
+    const [, , removeCookie] = useCookies();
+
+    const navigate = useNavigate();
 
     const [inputValue, setInputValue] = useState({
         id: "",
@@ -97,6 +99,8 @@ function Login() {
             const logOut = await logoutRes.json()
             console.log(logOut)
             removeCookie('refresh', { path: '/' })
+            navigate('/')
+            // return redirect('/')
         }
     }
     return (
