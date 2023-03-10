@@ -2,7 +2,8 @@ import { useState } from 'react'
 import style from './CommentForm.module.css'
 
 
-function CommentForm({ isEdit, toggleIsEdit, content }) {
+function CommentForm({ isEdit, toggleIsEdit, content, id, create }) {
+
     // 수정 폼 안에 작성되는 내용 관리
     const [localContent, setLocalContent] = useState(content)
 
@@ -14,8 +15,31 @@ function CommentForm({ isEdit, toggleIsEdit, content }) {
         toggleIsEdit();
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const createRes = await fetch(`http://localhost:8000/articles/review/${id}/comment/`, {
+            method: 'POST',
+            mode: 'cors',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                content: localContent,
+            })
+        })
+
+        if (createRes.ok) {
+            const createResData = await createRes.json()
+            // console.log(createResData)
+            create(createResData)
+            setLocalContent("")
+        }
+    }
+
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <textarea className={style.textarea} placeholder='댓글을 작성하세요.' value={localContent}
                 onChange={(e) => setLocalContent(e.target.value)}></textarea>
             <div className={style.button_wrapper}>
