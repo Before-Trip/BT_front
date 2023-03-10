@@ -1,5 +1,5 @@
 import CountryItem from "../../components/CountryItem/CountryItem";
-import { countryList } from "../../util/countyList";
+import { countryList } from "../../utils/countyList";
 import style from './Countries.module.css'
 import { useRef, useEffect } from "react";
 
