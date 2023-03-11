@@ -36,7 +36,7 @@ function Comment({ id }) {
                     <CommentForm create={updateCommentList} id={id} />
                 </div>
                 {commentList.map(comment => (<CommentItem key={comment.id}
-                    author={"miggo2704@gmail.com"}
+                    author={comment.user}
                     comment={comment} />))}
 
             </div>

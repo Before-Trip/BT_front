@@ -1,5 +1,6 @@
 // hooks
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 // components
 import CommentForm from './CommentForm'
@@ -8,7 +9,9 @@ import style from './CommentItem.module.css'
 
 function CommentItem({ author, comment, id }) {
 
-    const { user, content, created_at } = comment
+    const currentUser = useSelector((state) => state.userInfo.email)
+
+    const { content, created_at } = comment
 
     // 편집 모드
     const [isEdit, setIsEdit] = useState(false);
@@ -22,7 +25,7 @@ function CommentItem({ author, comment, id }) {
             <div className={Comment}>
                 <header>
                     <Profile user={author} created_at={created_at} />
-                    {author === user && !isEdit && <div className={style.btn_wrapper}>
+                    {author === currentUser && !isEdit && <div className={style.btn_wrapper}>
                         <button onClick={toggleIsEdit} className={style.btn_edit}>수정</button>
                         <button className={style.btn_delete}>삭제</button>
                     </div>}
