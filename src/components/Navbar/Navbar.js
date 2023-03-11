@@ -11,7 +11,7 @@ const linkList = [
     },
     {
         name: '커뮤니티',
-        path: '/'
+        path: '/JP/review/1'
     },
     {
         name: '내 스케줄',
