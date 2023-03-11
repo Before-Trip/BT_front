@@ -6,10 +6,12 @@ import CommentForm from './CommentForm'
 import Profile from '../Profile/Profile'
 import style from './CommentItem.module.css'
 
-function CommentItem({ author, user, content, created_at, id }) {
+function CommentItem({ author, comment, id }) {
+
+    const { user, content, created_at } = comment
 
     // 편집 모드
-    const [isEdit, setIsEdit] = useState(true);
+    const [isEdit, setIsEdit] = useState(false);
     // 편집모드 토글 함수
     const toggleIsEdit = () => {
         setIsEdit(!isEdit)
@@ -26,8 +28,8 @@ function CommentItem({ author, user, content, created_at, id }) {
                     </div>}
                 </header>
                 <div className={style.comment_content}>
-                    {isEdit ? <CommentForm id={id} content={content}
-                        isEdit={isEdit} toggleIsEdit={toggleIsEdit} /> : <p>내용내용</p>}
+                    {isEdit ? <CommentForm id={id}
+                        isEdit={isEdit} toggleIsEdit={toggleIsEdit} content={content} /> : <p>{content}</p>}
                 </div>
             </div>
 

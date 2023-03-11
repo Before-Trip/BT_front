@@ -6,6 +6,8 @@ import CommentItem from './CommentItem'
 
 function Comment({ id }) {
 
+    const [loading, setLoading] = useState(true);
+
     const [commentList, setCommentList] = useState([]);
 
     useEffect(() => {
@@ -13,13 +15,16 @@ function Comment({ id }) {
             .then(res => res.json())
             .then(res => {
                 setCommentList(res)
-                console.log(res)
+                // console.log(res)
+                setLoading(false)
             })
     }, [])
 
     const updateCommentList = (comment) => {
         setCommentList([comment, ...commentList])
     }
+
+    if (loading) return <div>댓글을 불러오는 중입니다...</div>
 
     return (
         <section className={style.Comment}>
@@ -30,7 +35,9 @@ function Comment({ id }) {
                     </h2>
                     <CommentForm create={updateCommentList} id={id} />
                 </div>
-                {commentList.map(comment => (<CommentItem key={comment.id} author={comment.user} user={"Lucy"} content={comment.content} created_at={comment.created_at} />))}
+                {commentList.map(comment => (<CommentItem key={comment.id}
+                    author={"miggo2704@gmail.com"}
+                    comment={comment} />))}
 
             </div>
         </section>
