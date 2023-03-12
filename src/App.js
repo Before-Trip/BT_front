@@ -6,11 +6,14 @@ import Home from "./pages/Home";
 import Community from "./pages/Community/Community";
 import Account from "./pages/Community/Account";
 import Login from "./components/Account/Login";
+import Authorization from "./components/Account/Authorization";
+import ReviewForm from "./pages/Review/ReviewForm";
 
-const router = createBrowserRouter([
+const routerInfo = createBrowserRouter([
   {
     path: "account",
     element: <Account />,
+    withAuthorization: false,
     children: [
       {
         path: "login",
@@ -34,12 +37,20 @@ const router = createBrowserRouter([
         path: "review/:reviewId",
         element: <Review />,
       },
+      {
+        path: "create",
+        element: (
+          <Authorization>
+            <ReviewForm />
+          </Authorization>
+        ),
+      }
     ]
-  }
+  },
 ])
 function App() {
   return (
-    <RouterProvider router={router} />
+    <RouterProvider router={routerInfo} />
   );
 }
 
