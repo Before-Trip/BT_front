@@ -1,11 +1,15 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { login } from '../../app/userSlice'
 import { BASE_URL } from '../../utils/const'
 import { getRefresh } from '../../utils/getRefresh'
 import style from './Login.module.css'
 
 function Login() {
+    const user = useSelector((state) => state.userInfo)
 
+    const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState({
         id: "",
         pw: "",
@@ -38,7 +42,10 @@ function Login() {
 
         if (loginRes.ok) {
             const loginResData = await loginRes.json()
-            // console.log(loginResData)
+            dispatch(login(loginResData.user))
+            // console.log((loginResData))
+            // console.log(user)
+
             return loginResData.token.refresh
         }
 
@@ -69,10 +76,10 @@ function Login() {
 
 
 
-        // if (accessToken) {
-        //     // console.log(accessToken)
-        //     await getRefresh()
-        // }
+        if (accessToken) {
+            // console.log(accessToken)
+            await getRefresh()
+        }
 
     }
     const handleRefresh = async () => {
@@ -83,7 +90,7 @@ function Login() {
     return (
         <section className={style.Login}>
             <Link to="/" className={style.logo}>
-                <img src={process.env.PUBLIC_URL + '/assets/logo.png'} />
+                <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt='logo' />
             </Link>
             <form className={style.loginForm} onSubmit={handleSubmit}>
                 <input name="id" type='text' value={inputValue.id} onChange={handleOnChange} />
@@ -95,6 +102,9 @@ function Login() {
             <button type='submit' className={style.button} onClick={handleRefresh}>
                 리프레시 해주세용
             </button>
+            <div>
+                {user.email}
+            </div>
         </section>
     )
 }

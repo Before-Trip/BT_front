@@ -38,7 +38,7 @@ function CommentForm({ isEdit, toggleIsEdit, content, id, create }) {
 
             if (createRes.ok) {
                 const createResData = await createRes.json()
-                // console.log(createResData)
+                console.log(createResData)
                 create(createResData)
                 setLocalContent("")
             }
