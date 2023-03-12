@@ -90,7 +90,7 @@ function Login() {
     return (
         <section className={style.Login}>
             <Link to="/" className={style.logo}>
-                <img src={process.env.PUBLIC_URL + '/assets/logo.png'} />
+                <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt='logo' />
             </Link>
             <form className={style.loginForm} onSubmit={handleSubmit}>
                 <input name="id" type='text' value={inputValue.id} onChange={handleOnChange} />
