@@ -13,7 +13,6 @@ const routerInfo = createBrowserRouter([
   {
     path: "account",
     element: <Account />,
-    withAuthorization: false,
     children: [
       {
         path: "login",

@@ -14,8 +14,8 @@ const linkList = [
         path: '/JP/review/1'
     },
     {
-        name: '내 스케줄',
-        path: '/'
+        name: '글쓰기',
+        path: '/JP/create'
     },
     {
         name: '로그인',
