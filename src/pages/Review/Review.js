@@ -11,7 +11,13 @@ function Review() {
     const [review, setReview] = useState({});
 
     useEffect(() => {
-        fetch(`${BASE_URL}articles/review/1/`)
+        fetch(`${BASE_URL}articles/review/1/`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
             .then(res => res.json())
             .then(res => {
                 setReview(res);
