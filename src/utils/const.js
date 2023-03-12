@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://www.beforetripback.shop/'
+export const BASE_URL = 'https://www.beforetripsback.shop/'
