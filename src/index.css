@@ -45,7 +45,7 @@ code {
 
 a {
   text-decoration: none;
-  color: var(--color-black);
+  color: var(--clr-black);
 }
 
 #root {
@@ -53,14 +53,23 @@ a {
 }
 
 .inner {
-  max-width: 732px;
-  margin: auto;
-  padding: 0 20px;
-  background-color: #fff;
+  padding: 0;
+  width: 100%;
+  transition: var(--transition);
+
 }
 
 .inner__content {
   padding: 20px;
+}
+
+@media screen and (min-width: 732px) {
+  .inner {  
+    max-width: 732px;
+    margin: auto;
+    padding: 0 20px;
+
+  }
 }
 
 .Account {
