@@ -1,0 +1,58 @@
+.card {
+    width: 20rem;
+    background: var(--clr-bg);
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 4%) 0px 4px 16px 0px;
+    transition: box-shadow 0.25s ease-in 0s, transform 0.25s ease-in 0s;
+    margin: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    min-height: 160px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: rgb(0 0 0 / 8%) 0px 12px 20px 0px;
+  }
+
+.card h3 {
+    margin: 10px 0;
+    padding: 0px 24px;
+}
+
+.card .detail {
+    padding: 0px 24px;
+}
+
+.card .detail p {
+    font-size: 14px;
+}
+
+.card .detail > p:nth-child(1) {
+    display: -webkit-box;
+    min-height: 70px;
+    height: 70px;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-height: 22px;
+}
+
+.card .subInfo {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--clr-noAccess);
+}
+
+.card .subInfo *:not(.ra) {
+    margin-bottom: 5px;
+    color: var(--clr-grey);
+}
+
+.detail p:nth-last-child(1) {
+    margin: 5px 0px;
+}

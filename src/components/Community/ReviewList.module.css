@@ -1,0 +1,38 @@
+.ReviewList {
+    margin-top: 40px;
+    padding: 0 18px;
+}
+
+.ReviewList header {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ReviewList header button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    outline: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    background-color: var(--clr-accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.ReviewList header button:hover {
+    background-color: #538fef;
+}
+
+
+.ReviewList h2 {
+    font-size: 19px;
+    max-width: 732px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    font-weight: 700;
+}
