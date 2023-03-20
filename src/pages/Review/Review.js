@@ -4,14 +4,17 @@ import style from './Reivew.module.css'
 import Comment from '../../components/Comment/Comment'
 import { useEffect, useState } from "react"
 import { BASE_URL } from "../../utils/const"
+import { useParams } from "react-router"
 
 function Review() {
+
+    const { reviewId } = useParams();
 
     const [loading, setLoading] = useState(true);
     const [review, setReview] = useState({});
 
     const fetchDetail = async () => {
-        const fetchRes = await fetch(`${BASE_URL}articles/review/0/`, {
+        const fetchRes = await fetch(`${BASE_URL}articles/review/${reviewId}/`, {
             method: 'GET',
             credentials: 'include',
             headers: {
