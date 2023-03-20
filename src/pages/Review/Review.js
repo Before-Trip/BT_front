@@ -10,20 +10,26 @@ function Review() {
     const [loading, setLoading] = useState(true);
     const [review, setReview] = useState({});
 
-    useEffect(() => {
-        fetch(`${BASE_URL}articles/review/0/`, {
+    const fetchDetail = async () => {
+        const fetchRes = await fetch(`${BASE_URL}articles/review/0/`, {
             method: 'GET',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
-            },
+            }
         })
-            .then(res => res.json())
-            .then(res => {
-                setReview(res);
-                setLoading(false);
-                console.log(res);
-            })
+        console.log("데이터 fetch요청 결과입니다.:", fetchRes)
+
+        if (fetchRes.ok) {
+            const reviews = await fetchRes.json()
+            setReview(reviews)
+        }
+    }
+
+    useEffect(() => {
+        fetchDetail();
+        setLoading(false);
+        console.log(res);
     }, [])
 
     if (loading) return <p>사용자 정보 로딩 중</p>
