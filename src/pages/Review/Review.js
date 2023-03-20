@@ -8,13 +8,13 @@ import { useParams } from "react-router"
 
 function Review() {
 
-    console.log(useParams())
+    const { reviewId } = useParams();
 
     const [loading, setLoading] = useState(true);
     const [review, setReview] = useState({});
 
     const fetchDetail = async () => {
-        const fetchRes = await fetch(`${BASE_URL}JP/articles/review/3/`, {
+        const fetchRes = await fetch(`${BASE_URL}articles/review/${reviewId}/`, {
             method: 'GET',
             credentials: 'include',
             headers: {
