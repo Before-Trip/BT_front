@@ -29,7 +29,6 @@ function Review() {
     useEffect(() => {
         fetchDetail();
         setLoading(false);
-        console.log(res);
     }, [])
 
     if (loading) return <p>사용자 정보 로딩 중</p>
