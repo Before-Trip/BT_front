@@ -11,7 +11,7 @@ function Review() {
     const [review, setReview] = useState({});
 
     useEffect(() => {
-        fetch(`${BASE_URL}articles/review/1/`, {
+        fetch(`${BASE_URL}articles/review/0/`, {
             method: 'GET',
             credentials: 'include',
             headers: {
