@@ -7,17 +7,25 @@ import CommentItem from './CommentItem'
 function Comment({ id }) {
 
     const [loading, setLoading] = useState(true);
-
     const [commentList, setCommentList] = useState([]);
 
+    const fetchComment = async () => {
+        const fetchRes = await fetch(`${BASE_URL}articles/review/${id}/comment/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        if (fetchRes.ok) {
+            const comments = await fetchRes.json();
+            setCommentList(comments)
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
-        fetch(`${BASE_URL}articles/review/${id}/comment/`)
-            .then(res => res.json())
-            .then(res => {
-                setCommentList(res)
-                // console.log(res)
-                setLoading(false)
-            })
+        fetchComment();
     }, [])
 
     const updateCommentList = (comment) => {
