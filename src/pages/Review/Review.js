@@ -26,12 +26,12 @@ function Review() {
         if (fetchRes.ok) {
             const reviews = await fetchRes.json()
             setReview(reviews)
+            setLoading(false);
         }
     }
 
     useEffect(() => {
         fetchDetail();
-        setLoading(false);
     }, [])
 
     if (loading) return <p>사용자 정보 로딩 중</p>
