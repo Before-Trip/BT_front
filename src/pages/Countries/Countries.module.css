@@ -54,3 +54,154 @@
 .card_wrapper::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+.CountryInfo header {
+  padding: 25px 0px;
+  background-color: var(--clr-accent);
+}
+
+.CountryInfo .date {
+  display: flex;
+  align-items: center;
+}
+
+.CountryInfo .date h3 {
+  margin-left: 5px;
+  margin-bottom: 4px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.now {
+  width: 48px;
+  height: 24px;
+  border-radius: 50px;
+  background-color: #fff;
+  background-size: 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../../../public/assets/ico_now_moving.gif');
+}
+
+.country__box {
+  min-height: 300px;
+  margin-top: 15px;
+  background-color: #fff;
+  border-radius: 25px;
+  padding: 25px 25px;
+}
+
+.country__box .updated_at {
+  font-size: 1em;
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--clr-noAccess);
+}
+
+.country__box ul {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0;
+  list-style: none;
+  margin-top: 25px;
+}
+
+.country__box ul li {
+  margin-bottom: 15px;
+}
+
+.country__box ul p {
+  font-size: .8em;
+  color: var(--clr-grey);
+}
+
+.news {
+  display: flex;
+  padding: 20px 14px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.news h4 {
+  font-weight: 700;
+}
+
+.news p {
+  margin-left: 15px;
+}
+
+.CountryInfo section {
+  padding: 20px 0;
+}
+
+.weather {
+  margin-top: 15px;
+}
+
+.weather h4 {
+  margin-bottom: 5px;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.weather__cards {
+  display: flex;
+  max-width: 732px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.weather__cards .card {
+  margin: 0px 5px;
+  border-radius: 18px;
+  height: 160px;
+  padding: 10px 15px;
+  background-color: #fff;
+
+}
+
+.weather__cards .card h5 {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.weather__cards .card ul {
+  display: flex;
+  list-style: none;
+  margin-top: 10px;
+  padding: 0;
+}
+
+.weather__cards .card .day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px 10px;
+}
+
+.weather__cards .card .day p:nth-child(1) {
+  color: var(--clr-grey);
+  font-size: .8em;
+}
+
+.weather__cards .card .day .weather {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin: 0;
+}
+
+.weather__cards .card .day .weather img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.weather__cards .card .day p:last-child {
+  font-weight: 700;
+  font-size: .8em;
+}
+
+
