@@ -1,8 +1,9 @@
-import { Link, Outlet } from 'react-router-dom'
-import style from './Navbar.module.css'
+import { Link } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { AiOutlineSearch } from "react-icons/ai";
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import style from './Navbar.module.css'
 
 const linkList = [
     {
@@ -26,35 +27,59 @@ const linkList = [
 
 function Navbar() {
 
-    const [showLinks, setShowLinks] = useState(false);
+
+    const [showLinks, setShowLinks] = useState(false)
+
+    const menuRef = useRef()
+    const toggleRef = useRef()
+    const linkContainerRef = useRef()
+    const getHeight = () => {
+        if (showLinks) {
+            const linkHeight = linkContainerRef.current.getBoundingClientRect().height
+            menuRef.current.style.height = `${linkHeight}px`
+        } else {
+            menuRef.current.style.height = '0px';
+        }
+        // console.log(linkHeight)
+    }
+    useEffect(() => {
+        getHeight();
+    }, [showLinks])
+
+
 
     return (
         <nav className={style.Navbar}>
-            <header className={style.header}>
-                <Link to='/' className={style.logo}>
-                    <img src={process.env.PUBLIC_URL + '/assets/logo.png'} />
-                </Link>
 
-                <div className={style.btn_wrapper}>
-                    <button className={style.search}>
+            <header>
+                <Link to='/'>
+                    <div className={style.logo}>
+                        <img src={process.env.PUBLIC_URL + '/assets/logo.png'} />
+                    </div>
+                </Link>
+                <span className={style.btn_wrapper}>
+                    <button>
                         <AiOutlineSearch />
                     </button>
-                    <button className={style.toggle} onClick={() => setShowLinks(!showLinks)}>
+                    {toggleRef && <button className={style.toggle} onClick={() => setShowLinks(!showLinks)}>
                         <GiHamburgerMenu />
-                    </button>
-                </div>
+                    </button>}
 
-                <div className={showLinks ? `${style.menu} ${style.open}` : `${style.menu}`}>
-                    <ul>
-                        {linkList.map((link, index) =>
-                        (<li key={index}>
-                            <Link to={link.path}>{link.name}</Link>
-                        </li>)
-                        )}
-                    </ul>
-                </div>
+                </span>
             </header>
-        </nav>
+
+            <div className={showLinks ? `${style.menu} ${style.open}` : `${style.menu}`}
+                ref={menuRef}>
+                <ul ref={linkContainerRef}>
+                    {linkList.map((link, index) =>
+                    (<li key={index}>
+                        <Link to={link.path}>{link.name}</Link>
+                    </li>)
+                    )}
+                </ul>
+            </div>
+
+        </nav >
     )
 }
 
