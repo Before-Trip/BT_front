@@ -42,10 +42,21 @@ function Navbar() {
         }
         // console.log(linkHeight)
     }
+
+    const handleResize = () => {
+        if (window.innerWidth > 732) {
+            setShowLinks(false)
+        }
+        return
+    }
+
+
     useEffect(() => {
         getHeight();
+        window.addEventListener('resize', handleResize);
+        console.log(showLinks)
+        // return window.removeEventListener('resize', handleResize)
     }, [showLinks])
-
 
 
     return (
