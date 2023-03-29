@@ -25,14 +25,41 @@ const linkList = [
 ]
 
 
-function Navbar() {
 
+function Navbar() {
+    const toggleRef = useRef(null)
+
+    const mutationObserver = new MutationObserver(async (mutation) => {
+        console.log(mutation)
+        const toggleBtn = document.getElementById('toggle');
+        if (toggleBtn.style.display === 'none') {
+            setShowLinks(false)
+        }
+    })
+
+    useEffect(() => {
+        if (toggleRef.current) {
+            console.log("node 감지:", toggleRef.current)
+            mutationObserver.observe(toggleRef.current, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style']
+            })
+
+            return () => {
+                mutationObserver.disconnect();
+            }
+        }
+    }, [])
 
     const [showLinks, setShowLinks] = useState(false)
 
     const menuRef = useRef()
-    const toggleRef = useRef()
+
+
     const linkContainerRef = useRef()
+
     const getHeight = () => {
         if (showLinks) {
             const linkHeight = linkContainerRef.current.getBoundingClientRect().height
@@ -43,19 +70,38 @@ function Navbar() {
         // console.log(linkHeight)
     }
 
-    const handleResize = () => {
-        if (window.innerWidth > 732) {
-            setShowLinks(false)
-        }
-        return
+    const setToggleClose = (event) => {
+        if (event.matches) setShowLinks(false);
     }
+
+    const handleMatchMedia = (match) => {
+        if (match.addEventListener) {
+            match.addEventListener('change', setToggleClose)
+
+            // clean up
+            return function cleanUp() {
+                match.removeEventListener('change', setToggleClose)
+            }
+        }
+        else {
+            match.addListener(setToggleClose)
+
+            // clean up
+            return function cleanUp() {
+                match.removeListener(setToggleClose)
+            }
+        }
+
+    }
+
+    useEffect(() => {
+        const mediaWatcher = window.matchMedia("(min-width: 732px)")
+        handleMatchMedia(mediaWatcher)
+    }, [])
 
 
     useEffect(() => {
         getHeight();
-        window.addEventListener('resize', handleResize);
-        console.log(showLinks)
-        // return window.removeEventListener('resize', handleResize)
     }, [showLinks])
 
 
@@ -72,9 +118,9 @@ function Navbar() {
                     <button>
                         <AiOutlineSearch />
                     </button>
-                    {toggleRef && <button className={style.toggle} onClick={() => setShowLinks(!showLinks)}>
+                    <button className={style.toggle} onClick={() => setShowLinks(!showLinks)}>
                         <GiHamburgerMenu />
-                    </button>}
+                    </button>
 
                 </span>
             </header>
