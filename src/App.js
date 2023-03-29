@@ -8,6 +8,7 @@ import Account from "./pages/Community/Account";
 import Login from "./components/Account/Login";
 import Authorization from "./components/Account/Authorization";
 import ReviewForm from "./pages/Review/ReviewForm";
+import CountryInfo from "./pages/Countries/CountryInfo";
 
 const routerInfo = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const routerInfo = createBrowserRouter([
     path: ":id",
     element: <Home />,
     children: [
+      {
+        path: "",
+        element: <CountryInfo />
+      },
       {
         path: "community",
         element: <Community />,
