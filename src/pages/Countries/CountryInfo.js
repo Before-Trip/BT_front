@@ -6,7 +6,7 @@ function CountryInfo() {
     return (
         <div className={style.CountryInfo}>
             <header>
-                <div className='inner'>
+                <div className={style.content}>
                     <div className={style.date}>
                         <div className={style.now}>                        </div>
                         <h3>2023년 3월 21일 여행 수칙</h3>
@@ -50,7 +50,7 @@ function CountryInfo() {
             </header>
 
             <section>
-                <div className='inner'>
+                <div className={style.content}>
                     <div className={style.news}>
                         <h4>소식&nbsp;&gt;</h4>
                         <p>일본 여권, 안보문서 어쩌구 내용입니다.</p>
