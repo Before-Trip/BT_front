@@ -20,6 +20,7 @@ export const userSlice = createSlice({
             state.name = "";
             state.email = "";
             state.isLogined = false;
+            console.log("로그아웃되었습니다.")
         }
     }
 })
