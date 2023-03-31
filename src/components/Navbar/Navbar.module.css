@@ -68,17 +68,33 @@
     width: 100%;
 }
 
-.Navbar .menu a {
-    display: block;
-    padding: 8px 12px;
+.Navbar .menu ul li .avatar {
+    display: none;
 }
 
-.Navbar .menu a:hover {
+.Navbar .menu a, .Navbar .menu button {
+    display: block;
+    font-size: 1em;
+    padding: 8px 12px;
+}
+.Navbar .menu button {
+    background: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.Navbar .menu li:hover {
     border-radius: 5px;
     background-color: var(--clr-bg);
+}
+
+.Navbar .menu li:hover * {
     font-weight: 700;
     color: var(--clr-blue);
 }
+
 
 @media screen and (min-width: 732px) {
     .Navbar {
@@ -112,11 +128,37 @@
         flex-direction: row;
     }
 
-    .Navbar .menu a:hover {
+    .Navbar .menu ul li:nth-last-child(1) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .Navbar .menu ul li .avatar {
+        width: 43px;
+        height: 43px;
+        margin: 0 auto;
+        border-radius: 50%;
+        overflow: hidden;
+        background: var(--clr-bg);
+        margin-left: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .Navbar .menu ul li .avatar img {
+        width: 100%;
+        object-fit: cover;
+        transform: translateX(3px);
+    }
+
+    .Navbar .menu li:hover {
         font-weight: 700;
         color: var(--clr-blue);
         background-color: transparent;
     }
+
 
     .toggle {
         display: none;

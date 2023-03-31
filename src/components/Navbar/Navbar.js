@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import style from './Navbar.module.css'
 
+import { useSelector } from 'react-redux';
+
 const linkList = [
     {
         name: '메인',
@@ -18,15 +20,13 @@ const linkList = [
         name: '글쓰기',
         path: '/JP/create'
     },
-    {
-        name: '로그인',
-        path: '/account/login'
-    },
 ]
 
-
-
 function Navbar() {
+
+    const user = useSelector((state) => state.userInfo)
+
+    const { email, isLogined } = user
     const toggleRef = useRef(null)
 
     const mutationObserver = new MutationObserver(async (mutation) => {
@@ -56,7 +56,6 @@ function Navbar() {
     const [showLinks, setShowLinks] = useState(false)
 
     const menuRef = useRef()
-
 
     const linkContainerRef = useRef()
 
@@ -133,6 +132,16 @@ function Navbar() {
                         <Link to={link.path}>{link.name}</Link>
                     </li>)
                     )}
+                    <li>{isLogined ?
+                        (showLinks && <button type='submit' onClick={() => {
+
+                        }}>로그아웃</button>) ||
+                        <div className={style.avatar}>
+                            <img src={process.env.PUBLIC_URL + 'assets/logo.png'} alt={`사용자 ${email}님의 프로필 사진입니다`} title={`${email}`} />
+                        </div>
+                        :
+                        <Link to={'/account/login'}>로그인</Link>
+                    }</li>
                 </ul>
             </div>
 
