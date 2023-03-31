@@ -112,7 +112,7 @@
         flex-direction: row;
     }
 
-    .menu a:hover {
+    .Navbar .menu a:hover {
         font-weight: 700;
         color: var(--clr-blue);
         background-color: transparent;
