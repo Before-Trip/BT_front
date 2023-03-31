@@ -1,11 +1,15 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { AiOutlineSearch } from "react-icons/ai";
 import { useEffect, useRef, useState } from 'react';
 
 import style from './Navbar.module.css'
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../api/login';
+import { removeCookieToken } from '../../utils/cookies';
+import { logoutUser } from '../../app/userSlice';
+
 
 const linkList = [
     {
@@ -26,6 +30,8 @@ function Navbar() {
 
     const user = useSelector((state) => state.userInfo)
 
+    const navigate = useNavigate();
+
     const { email, isLogined } = user
     const toggleRef = useRef(null)
 
@@ -36,6 +42,8 @@ function Navbar() {
             setShowLinks(false)
         }
     })
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (toggleRef.current) {
@@ -93,6 +101,20 @@ function Navbar() {
 
     }
 
+    const handleOnLogout = async () => {
+        const logoutResult = await logout();
+        if (logoutResult) {
+            dispatch(logoutUser())
+            removeCookieToken();
+            navigate('/')
+        }
+
+        else {
+            console.log("로그아웃 실패: 요청 실패")
+            alert("로그아웃에 실패하였습니다.")
+        }
+    }
+
     useEffect(() => {
         const mediaWatcher = window.matchMedia("(min-width: 732px)")
         handleMatchMedia(mediaWatcher)
@@ -133,9 +155,7 @@ function Navbar() {
                     </li>)
                     )}
                     <li>{isLogined ?
-                        (showLinks && <button type='submit' onClick={() => {
-
-                        }}>로그아웃</button>) ||
+                        (showLinks && <button type='submit' onClick={handleOnLogout}>로그아웃</button>) ||
                         <div className={style.avatar}>
                             <img src={process.env.PUBLIC_URL + 'assets/logo.png'} alt={`사용자 ${email}님의 프로필 사진입니다`} title={`${email}`} />
                         </div>
