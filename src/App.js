@@ -28,9 +28,7 @@ const routerInfo = createBrowserRouter([
   {
     path: ":id",
     element: (
-      <Authorization>
-        <Home />
-      </Authorization>
+      <Home />
     ),
     children: [
       {

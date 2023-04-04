@@ -132,7 +132,7 @@ function Navbar() {
             <header>
                 <Link to='/'>
                     <div className={style.logo}>
-                        <img src={process.env.PUBLIC_URL + '/assets/logo.png'} />
+                        <img src={'/assets/logo.png'} />
                     </div>
                 </Link>
                 <span className={style.btn_wrapper}>
@@ -157,7 +157,7 @@ function Navbar() {
                     <li>{isLogined ?
                         (showLinks && <button type='submit' onClick={handleOnLogout}>로그아웃</button>) ||
                         <div className={style.avatar}>
-                            <img src={process.env.PUBLIC_URL + 'assets/logo.png'} alt={`사용자 ${email}님의 프로필 사진입니다`} title={`${email}`} />
+                            <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt={`사용자 ${email}님의 프로필 사진입니다`} title={`${email}`} />
                         </div>
                         :
                         <Link to={'/account/login'}>로그인</Link>
