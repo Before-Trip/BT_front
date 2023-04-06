@@ -8,7 +8,6 @@ export const getRefresh = async () => {
         method: 'POST',
         credentials: 'include',
         headers: {
-            // 'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -16,6 +15,7 @@ export const getRefresh = async () => {
         })
     })
 
+    // 새로 받아온 accessToken이 있다면,
     if (refreshTokenRes.ok) {
         const Token = await refreshTokenRes.json()
         console.log(Token)
