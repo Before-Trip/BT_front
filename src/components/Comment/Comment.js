@@ -3,6 +3,7 @@ import { BASE_URL } from '../../utils/const'
 import style from './Comment.module.css'
 import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
+import { getComment } from '../../api/review'
 
 function Comment({ id }) {
 
@@ -10,17 +11,11 @@ function Comment({ id }) {
     const [commentList, setCommentList] = useState([]);
 
     const fetchComment = async () => {
-        const fetchRes = await fetch(`${BASE_URL}articles/review/${id}/comment/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        const commentData = await getComment(id)
 
-        if (fetchRes.ok) {
-            const comments = await fetchRes.json();
-            setCommentList(comments)
-            setLoading(false);
+        if (commentData) {
+            setCommentList(commentData)
+            setLoading(false)
         }
     }
 
@@ -44,8 +39,10 @@ function Comment({ id }) {
                     <CommentForm create={updateCommentList} id={id} />
                 </div>
                 {commentList.map(comment => (<CommentItem key={comment.id}
+                    id={id}
                     author={comment.user}
-                    comment={comment} />))}
+                    comment={comment}
+                    update={fetchComment} />))}
 
             </div>
         </section>

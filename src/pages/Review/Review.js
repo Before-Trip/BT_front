@@ -5,6 +5,7 @@ import Comment from '../../components/Comment/Comment'
 import { useEffect, useState } from "react"
 import { BASE_URL } from "../../utils/const"
 import { useParams } from "react-router"
+import { getReview } from "../../api/review"
 
 function Review() {
 
@@ -14,19 +15,12 @@ function Review() {
     const [review, setReview] = useState({});
 
     const fetchDetail = async () => {
-        const fetchRes = await fetch(`${BASE_URL}articles/review/${reviewId}/`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        console.log("데이터 fetch요청 결과입니다.:", fetchRes)
-
-        if (fetchRes.ok) {
-            const reviews = await fetchRes.json()
-            setReview(reviews)
+        const fetchRes = await getReview(reviewId);
+        if (fetchRes) {
+            setReview(fetchRes)
             setLoading(false);
+        } else {
+            console.log("응답이 없습니다.")
         }
     }
 
@@ -58,7 +52,7 @@ function Review() {
                 </div>
 
             </section >
-            <Comment id={review.id} />
+            <Comment id={reviewId} />
         </div >
 
     )
