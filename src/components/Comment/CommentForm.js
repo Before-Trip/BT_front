@@ -2,8 +2,12 @@ import { useState } from 'react'
 import { BASE_URL } from '../../utils/const'
 import { getRefresh } from '../../utils/getRefresh'
 import style from './CommentForm.module.css'
+import { useParams } from 'react-router-dom'
 
-function CommentForm({ isEdit, toggleIsEdit, content, id, create }) {
+
+function CommentForm({ isEdit, toggleIsEdit, content, create, commentId, update }) {
+
+    const { reviewId } = useParams();
 
     // 수정 폼 안에 작성되는 내용 관리
     const [localContent, setLocalContent] = useState(content)
@@ -22,29 +26,57 @@ function CommentForm({ isEdit, toggleIsEdit, content, id, create }) {
         const accessToken = await getRefresh();
 
         if (accessToken) {
-            console.log(accessToken)
-            const createRes = await fetch(`${BASE_URL}articles/review/${id}/comment/`, {
-                method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    content: localContent,
+            console.log(`새로 받아온 ${accessToken}입니다.`)
+            if (isEdit) {
+                // 댓글 수정
+                const editRes = await fetch(`${BASE_URL}articles/review/${reviewId}/comment/${commentId}/`, {
+                    method: 'PATCH',
+                    mode: 'cors',
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: localContent,
+                    })
                 })
-            })
 
-            if (createRes.ok) {
-                const createResData = await createRes.json()
-                console.log(createResData)
-                create(createResData)
-                setLocalContent("")
+                if (editRes.ok) console.log("댓글 수정 요청은 성공했습니다.")
+                try {
+                    const editData = await editRes.json()
+                    console.log(editData)
+                    await update()
+                    toggleIsEdit();
+                }
+                catch {
+                    console.log(new Error("에러발생"))
+                }
+            }
+
+            else {
+                // 댓글 작성
+                const createRes = await fetch(`${BASE_URL}articles/review/${reviewId}/comment/`, {
+                    method: 'POST',
+                    mode: 'cors',
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: localContent,
+                    })
+                })
+
+                if (createRes.ok) {
+                    const createResData = await createRes.json()
+                    console.log(createResData)
+                    create(createResData)
+                    setLocalContent("")
+                }
             }
         }
-
-
     }
 
     return (
