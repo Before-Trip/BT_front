@@ -50,6 +50,7 @@ function CommentItem({ author, comment, id, update }) {
                             toggleIsEdit={toggleIsEdit}
                             content={content}
                             commentId={comment.id}
+                            update={update}
                         /> : <p>{content}</p>}
                 </div>
             </div>
