@@ -9,6 +9,7 @@ import Login from "./components/Account/Login";
 import Authorization from "./components/Account/Authorization";
 import ReviewForm from "./pages/Review/ReviewForm";
 import CountryInfo from "./pages/Countries/CountryInfo";
+import Register from "./components/Account/Register";
 
 const routerInfo = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const routerInfo = createBrowserRouter([
       {
         path: "login",
         element: <Login />
+      },
+      {
+        path: "register",
+        element: <Register />
       }
     ]
   },
