@@ -2,8 +2,13 @@ import { BASE_URL } from "./const"
 import { getCookieToken } from "./cookies"
 
 export const getRefresh = async () => {
+    // 발급받은 리프레시 토큰이 있는지 확인(로그인 여부 확인)
     const refreshToken = getCookieToken();
+
+    if (!refreshToken) return null
     console.log(refreshToken)
+
+    // 있다면, accessToken 발급 요청
     const refreshTokenRes = await fetch(`${BASE_URL}users/auth/refresh/`, {
         method: 'POST',
         credentials: 'include',
@@ -19,6 +24,6 @@ export const getRefresh = async () => {
     if (refreshTokenRes.ok) {
         const Token = await refreshTokenRes.json()
         console.log(Token)
-        return Token.access
+        return Token ? 'success' : null
     }
 }

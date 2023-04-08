@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { login } from '../../app/userSlice'
-import { BASE_URL } from '../../utils/const'
-import { setRefreshToken } from '../../utils/cookies'
-import { getRefresh } from '../../utils/getRefresh'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginUser } from '../../app/userSlice'
 import style from './Login.module.css'
+import { login } from '../../api/login'
 
 function Login() {
     const user = useSelector((state) => state.userInfo)
+    const navigate = useNavigate()
 
     const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState({
@@ -25,85 +24,29 @@ function Login() {
         })
     }
 
-    const loginUser = async (args) => {
-        const loginRes = await fetch(`${BASE_URL}users/auth/`,
-            {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: args.id,
-                    password: args.pw,
-                })
-            })
-
-        // console.log(loginRes)
-
-        if (loginRes.ok) {
-            const loginResData = await loginRes.json()
-            console.log((loginResData))
-            dispatch(login(loginResData.user))
-            setRefreshToken(loginResData.token.refresh)
-            // console.log(user)
-
-            return loginResData.token.refresh
-        }
-
-    }
-
-    const getCommentList = async (token) => {
-        const commentsRes = await fetch(`${BASE_URL}articles/review/1/comment/`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-        })
-
-        if (commentsRes.ok) {
-            const commentData = await commentsRes.json();
-            console.log(commentData)
-        }
-    }
-
-
-
-    const handleSubmit = async (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
+        const loginResult = await login(inputValue)
 
-        const accessToken = await loginUser(inputValue);
+        // 로그인 요청 실패라면, 함수 종료
+        if (loginResult === 'fail') return
 
-
-
-        if (accessToken) {
-            // console.log(accessToken)
-            await getRefresh()
-        }
-
+        dispatch(loginUser(loginResult.userInfo))
+        navigate('/')
     }
-    const handleRefresh = async () => {
-        // console.log("요청 보내기전: ", cookies.refresh)
-        const refreshToken = await getRefresh();
-        console.log(refreshToken)
-    }
+
     return (
         <section className={style.Login}>
             <Link to="/" className={style.logo}>
                 <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt='logo' />
             </Link>
-            <form className={style.loginForm} onSubmit={handleSubmit}>
+            <form className={style.loginForm} onSubmit={handleLoginSubmit}>
                 <input name="id" type='text' value={inputValue.id} onChange={handleOnChange} />
                 <input name="pw" type='password' value={inputValue.pw} onChange={handleOnChange} />
                 <button type='submit' className={style.button}>
                     로그인
                 </button>
             </form>
-            <button type='submit' className={style.button} onClick={handleRefresh}>
-                리프레시 해주세용
-            </button>
             <div>
                 {user.email}
             </div>
