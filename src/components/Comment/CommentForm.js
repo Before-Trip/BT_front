@@ -3,7 +3,7 @@ import { BASE_URL } from '../../utils/const'
 import { getRefresh } from '../../utils/getRefresh'
 import style from './CommentForm.module.css'
 import { useParams } from 'react-router-dom'
-
+import { getUserInfo } from '../../api/login'
 
 function CommentForm({ isEdit, toggleIsEdit, content, create, commentId, update }) {
 
@@ -21,12 +21,11 @@ function CommentForm({ isEdit, toggleIsEdit, content, create, commentId, update 
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const accessToken = await getRefresh();
+        const checkAuthorize = await getUserInfo();
 
-        if (accessToken) {
-            console.log(`새로 받아온 ${accessToken}입니다.`)
+        if (checkAuthorize) {
             if (isEdit) {
                 // 댓글 수정
                 const editRes = await fetch(`${BASE_URL}articles/review/${reviewId}/comment/${commentId}/`, {
@@ -34,7 +33,6 @@ function CommentForm({ isEdit, toggleIsEdit, content, create, commentId, update 
                     mode: 'cors',
                     credentials: 'include',
                     headers: {
-                        'Authorization': `Bearer ${accessToken}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
@@ -61,7 +59,6 @@ function CommentForm({ isEdit, toggleIsEdit, content, create, commentId, update 
                     mode: 'cors',
                     credentials: 'include',
                     headers: {
-                        'Authorization': `Bearer ${accessToken}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
@@ -77,6 +74,8 @@ function CommentForm({ isEdit, toggleIsEdit, content, create, commentId, update 
                 }
             }
         }
+
+
     }
 
     return (
