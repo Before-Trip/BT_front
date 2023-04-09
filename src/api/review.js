@@ -55,7 +55,6 @@ export const removeComment = async (reviewId, commentId) => {
             method: 'DELETE',
             credentials: 'include',
             headers: {
-                'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json'
             }
         })
@@ -65,5 +64,27 @@ export const removeComment = async (reviewId, commentId) => {
             return true
 
         } else { console.log("token이 존재하지 않습니다. 유효 토큰이 아닙니다.") }
+    }
+}
+
+// 게시글 작성 함수
+export const createReview = async (title, content) => {
+    const accessToken = await getRefresh();
+    if (accessToken) {
+        const createRes = await fetch(`${BASE_URL}articles/review/`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title, content
+            })
+        })
+
+        if (createRes.ok) {
+            console.log("요청 성공")
+            return createRes.json()
+        }
     }
 }
