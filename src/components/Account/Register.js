@@ -1,8 +1,12 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { register } from "../../api/login"
+import { useDispatch } from "react-redux"
+import { loginUser } from "../../app/userSlice"
 
 const Register = () => {
+
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
     const [inputValue, setInputValue] = useState({
@@ -23,10 +27,11 @@ const Register = () => {
         e.preventDefault();
 
         const registerRes = await register(inputValue)
-        if (registerRes) {
-            console.log(registerRes)
 
-        }
+        if (registerRes === 'fail') return
+        dispatch(loginUser(registerRes.userInfo))
+
+        console.log("회원가입이 완료되었습니다.")
         navigate('/')
     }
 
