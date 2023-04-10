@@ -32,7 +32,7 @@ function Login() {
         if (loginResult === 'fail') return
 
         dispatch(loginUser(loginResult.userInfo))
-        navigate('/')
+        navigate(-1)
     }
 
     return (
