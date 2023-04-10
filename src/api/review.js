@@ -1,5 +1,6 @@
 import { BASE_URL } from "../utils/const"
 import { getRefresh } from "../utils/getRefresh";
+import { getUserInfo } from "./login";
 
 // 리뷰 가져오는 함수
 export const getReview = async (reviewId) => {
@@ -69,8 +70,8 @@ export const removeComment = async (reviewId, commentId) => {
 
 // 게시글 작성 함수
 export const createReview = async (title, content) => {
-    const accessToken = await getRefresh();
-    if (accessToken) {
+    const authorize = await getUserInfo();
+    if (authorize) {
         const createRes = await fetch(`${BASE_URL}articles/review/`, {
             method: 'POST',
             credentials: 'include',
@@ -82,9 +83,6 @@ export const createReview = async (title, content) => {
             })
         })
 
-        if (createRes.ok) {
-            console.log("요청 성공")
-            return createRes.json()
-        }
+        return createRes.ok ? createRes.json() : null
     }
 }
