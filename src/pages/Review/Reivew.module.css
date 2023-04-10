@@ -29,4 +29,94 @@
     align-items: center;
 }
 
+/* ReviewForm */
+.ReviewForm form {
+    display: flex;
+    flex-direction: column;
+    min-width: 100vw;
+    transition: var(--transition);
+}
 
+.ReviewForm form .inputBox {
+    width: 100%;
+    height: 70px;
+    position: relative;
+    padding: 10px 30px;
+    background: #fff;
+    margin-top: 60px;
+}
+
+.ReviewForm form .inputBox::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    top: -100%;
+    left: 0;
+    background-color: #fff;
+} 
+
+.ReviewForm form .inputBox::after {
+    content: '';
+    width: 95%;
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    height: 1px;
+    background: var(--clr-noAccess);
+    transform: translate(-50%,-50%);
+}
+
+.ReviewForm form input {
+    width: 100%;
+    font-size: 1.8em;
+}
+
+.ReviewForm form textarea {
+    font-size: 1em;
+}
+
+.ReviewForm form input,
+.ReviewForm form textarea {
+    outline: none;
+    border: none;
+}
+
+.ReviewForm form textarea {
+    resize: none;
+    padding: 15px 30px;
+    padding-top: 30px;
+    min-height: 100vh;
+}
+
+.ReviewForm form button {
+    outline: none;
+    border: none;
+    padding: 25px 0;
+    cursor: pointer;
+    background-color: var(--clr-blue);
+    color: #fff;
+    font-size: 1.2em;
+    margin: 15px auto;
+    min-width: 95%;
+    border-radius: 14px;
+    font-weight: bold;
+}
+
+.ReviewForm form button:hover {
+    background: var(--clr-done);
+}
+
+@media screen and (min-width:732px) {
+    .ReviewForm form {
+        display: flex;
+        flex-direction: column;
+        min-width: 732px;
+        max-width: 732px;
+        margin: 0 auto;
+    }
+
+    .ReviewForm form button {
+        min-width: 732px;
+    }
+}

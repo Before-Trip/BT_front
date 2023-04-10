@@ -6,24 +6,23 @@ export const userSlice = createSlice({
         name: "",
         id: null,
         email: null,
-        isLogined: null,
-        isLoading: false,
+        isLogined: false
     },
     reducers: {
-        login: (state, action) => {
+        loginUser: (state, action) => {
             state.email = action.payload.email;
             state.isLogined = true;
-            console.log("로그인 되었습니다.")
+            console.log("유저 정보가 로그인 되었습니다.")
         },
 
         logoutUser: (state) => {
             state.name = "";
             state.email = "";
             state.isLogined = false;
-            console.log("로그아웃되었습니다.")
+            console.log("유저 정보가 로그아웃되었습니다.")
         }
     }
 })
 
-export const { login, logoutUser } = userSlice.actions
+export const { loginUser, logoutUser } = userSlice.actions
 export default userSlice.reducer

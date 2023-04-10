@@ -3,7 +3,6 @@ import Profile from '../../components/Profile/Profile'
 import style from './Reivew.module.css'
 import Comment from '../../components/Comment/Comment'
 import { useEffect, useState } from "react"
-import { BASE_URL } from "../../utils/const"
 import { useParams } from "react-router"
 import { getReview } from "../../api/review"
 
@@ -29,7 +28,6 @@ function Review() {
     }, [])
 
     if (loading) return <p>사용자 정보 로딩 중</p>
-
 
     return (
         <div className={style.detail}>
