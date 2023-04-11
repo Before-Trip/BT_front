@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { register } from "../../api/login"
 import { useDispatch } from "react-redux"
 import { loginUser } from "../../app/userSlice"
+import style from './Register.module.css'
 
 const Register = () => {
 
@@ -36,15 +37,19 @@ const Register = () => {
     }
 
     return (
-        <div className="Register">
+        <section className={style.Register}>
             <form onSubmit={handleSubmmit}>
-                <input type="text" name="id" onChange={handleOnChange} />
-                <input type="password" name="pw" onChange={handleOnChange} />
+                <input type="text" name="id"
+                    placeholder='아이디'
+                    onChange={handleOnChange} />
+                <input type="password" name="pw"
+                    placeholder="비밀번호"
+                    onChange={handleOnChange} />
                 <button type='submit'>
                     회원가입
                 </button>
             </form>
-        </div>
+        </section>
     )
 }
 
