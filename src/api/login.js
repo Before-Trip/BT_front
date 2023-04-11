@@ -15,7 +15,17 @@ export const register = async ({ id, pw }) => {
         })
     })
 
-    return registerRes.ok ? registerRes.json() : null
+    // 회원가입에 성공했다면,
+    if (registerRes.ok) {
+        const registerData = await registerRes.json()
+        setRefreshToken(registerData.token.refresh)
+        return {
+            result: 'success',
+            userInfo: registerData.user
+        }
+    }
+
+    return 'fail'
 }
 
 export const login = async (args) => {

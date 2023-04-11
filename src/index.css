@@ -9,6 +9,7 @@
   --clr-noAccess: #CCCCCC;
   --clr-grey: #999999;
   --clr-darkGrey: #666666;
+  --clr-done: #3168ae;
 
   /* transition */
   --transition: .2s
@@ -77,4 +78,18 @@ a {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+}
+
+.Account__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-25%);
+}
+
+.Account__body img {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 20px;
 }
