@@ -143,7 +143,7 @@ function Navbar() {
                 <ul ref={linkContainerRef}>
                     {linkList.map((link, index) =>
                     (<li key={index}>
-                        <Link to={link.path}>{link.name}</Link>
+                        <Link to={link.path} onClick={() => setShowLinks(false)}>{link.name}</Link>
                     </li>)
                     )}
                     <li>{isLogined ?
