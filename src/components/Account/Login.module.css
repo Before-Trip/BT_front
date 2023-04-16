@@ -29,24 +29,38 @@
 }
 
 .loginForm input:focus {
-    outline: none;
-    border: 1px solid #acacac;
-  }
-  
-  .loginForm input:focus~svg {
-    fill: rgba(155, 155, 155)
-  }
+  outline: none;
+  border: 1px solid #acacac;
+}
 
-  .button {
-    background-color: var(--clr-accent);
-    padding: 1rem;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-  }
+.loginForm input:focus~svg {
+  fill: rgba(155, 155, 155)
+}
 
-  .button:hover {
-    opacity: .9;
-  }
+.button {
+  background-color: var(--clr-accent);
+  padding: 1rem;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+.button:hover {
+  opacity: .9;
+}
+
+.Login a {
+  position: absolute;
+  transform: translateY(40%);
+  color: var(--clr-blue);
+  font-weight: 500;
+  font-size: 0.9em;
+}
+
+.Login a:hover {
+  text-decoration: underline;
+  font-weight: 700;
+}
