@@ -37,12 +37,9 @@ function Login() {
 
     return (
         <section className={style.Login}>
-            <Link to="/" className={style.logo}>
-                <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt='logo' />
-            </Link>
             <form className={style.loginForm} onSubmit={handleLoginSubmit}>
-                <input name="id" type='text' value={inputValue.id} onChange={handleOnChange} />
-                <input name="pw" type='password' value={inputValue.pw} onChange={handleOnChange} />
+                <input name="id" type='text' value={inputValue.id} onChange={handleOnChange} placeholder='아이디' />
+                <input name="pw" type='password' value={inputValue.pw} onChange={handleOnChange} placeholder='비밀번호' />
                 <button type='submit' className={style.button}>
                     로그인
                 </button>
@@ -50,6 +47,7 @@ function Login() {
             <div>
                 {user.email}
             </div>
+            <Link to='/account/register'>아직 회원이 아니신가요?</Link>
         </section>
     )
 }
