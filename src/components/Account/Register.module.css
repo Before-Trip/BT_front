@@ -1,0 +1,43 @@
+.Register {
+    width: 100%;
+    min-width: 315px;
+}
+
+.Register form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Register form input {
+    height: 50px;
+    outline: none;
+    border: 1px solid var(--clr-noAccess);
+    padding: 0 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    color: var(--clr-black);
+}
+
+.Register form input:focus {
+    border: 1px solid var(--clr-grey);
+}
+/* 
+.Register form input[type='text']
+
+.Register form input[type='password'] */
+
+.Register form button[type='submit'] {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 20px 0px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    background-color: var(--clr-accent);
+}
+
+.Register form button[type='submit']:hover {
+    opacity: 0.9;   
+}

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { AiOutlineSearch } from "react-icons/ai";
 import { useEffect, useRef, useState } from 'react';
@@ -7,26 +7,25 @@ import style from './Navbar.module.css'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../api/login';
-import { removeCookieToken } from '../../utils/cookies';
 import { logoutUser } from '../../app/userSlice';
 
-
-const linkList = [
-    {
-        name: '메인',
-        path: '/'
-    },
-    {
-        name: '커뮤니티',
-        path: '/JP/review/1'
-    },
-    {
-        name: '글쓰기',
-        path: '/JP/create'
-    },
-]
-
 function Navbar() {
+    const { id } = useParams();
+
+    const linkList = [
+        {
+            name: '메인',
+            path: '/'
+        },
+        {
+            name: '커뮤니티',
+            path: `/${id}/community`
+        },
+        {
+            name: '글쓰기',
+            path: '/JP/create'
+        },
+    ]
 
     const user = useSelector((state) => state.userInfo)
 
@@ -103,16 +102,9 @@ function Navbar() {
 
     const handleOnLogout = async () => {
         const logoutResult = await logout();
-        if (logoutResult) {
-            dispatch(logoutUser())
-            removeCookieToken();
-            navigate('/')
-        }
-
-        else {
-            console.log("로그아웃 실패: 요청 실패")
-            alert("로그아웃에 실패하였습니다.")
-        }
+        if (logoutResult === 'fail') return
+        dispatch(logoutUser())
+        navigate('/')
     }
 
     useEffect(() => {
