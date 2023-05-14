@@ -10,6 +10,7 @@ import { logout } from '../../api/login';
 import { logoutUser } from '../../app/userSlice';
 
 function Navbar() {
+
     const { id } = useParams();
 
     const linkList = [

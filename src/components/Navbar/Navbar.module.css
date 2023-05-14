@@ -47,13 +47,14 @@
     height: 0;
     overflow: hidden;
     background: #fff;
-    transition: .3s ease-out height;
+    transition: none;
+
 }
 
 .Navbar .menu.open {
     border-top: 1px solid var(--clr-bg);
+    transition: .3s ease-out height;
 }
-
 .Navbar .menu ul {
     list-style: none;
     padding: 0;
